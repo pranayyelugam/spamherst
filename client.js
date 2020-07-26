@@ -81,17 +81,19 @@ function processCommand(message) {
             if (arguments.length < 0) return
             if (arguments.length > 1) message.channel.send("Please enter the command correctly. Check #general-info for help")
             if (arguments[0] == "Employed") {
-                const member = message.mentions.members.first();
-                if (member.roles.cache.some(role => role.name === 'Employed')) {
-                    message.channel.send("You already have the Employed badge. :(").then(sentMessage => {
-                        sentMessage.react(':thumbsdown_tone1:');
-                    });
-                } else {
-                    const role = guild.roles.cache.find(role => role.name === 'Employed');
-                    if (!role) return console.error("404: role not found")
-                    member.roles.add(role)
-                    message.react('👍')
-                }
+                message.guild.members.fetch(message.author)
+                    .then(member => {
+                        if (member.roles.cache.some(role => role.name === 'Employed')) {
+                            message.channel.send("You already have the Employed badge. :(").then(sentMessage => {
+                                sentMessage.react(':thumbsdown_tone1:');
+                            });
+                        } else {
+                            const role = guild.roles.cache.find(role => role.name === 'Employed');
+                            if (!role) return console.error("404: role not found")
+                            member.roles.add(role)
+                            message.react('👍')
+                        }
+                    })
             }
     }
 
