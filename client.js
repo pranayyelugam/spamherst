@@ -5,7 +5,7 @@ const config = require("./config/config.json")
 
 client.on('ready', () => {
     console.log("Spamherst is online!")
-    client.channels.get('736913317020434522').send("Spamherst is Online!")
+    client.channels.cache.get('736913317020434522').send("Spamherst is Online!")
 })
 
 client.on('message', msg => {
@@ -15,7 +15,7 @@ client.on('message', msg => {
 })
 
 client.on('guildMemberAdd', member => {
-    client.channels.get('736909338425294899').send('**' + member.user.username + '** has joined the server!')
+    client.channels.cache.get('736909338425294899').send('**' + member.user.username + '** has joined the server!')
         .then(send("We hope you have brought pizza with you!"))
 })
 
