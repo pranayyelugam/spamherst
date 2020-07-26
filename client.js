@@ -15,8 +15,7 @@ client.on('message', msg => {
 })
 
 client.on('guildMemberAdd', member => {
-    client.channels.cache.get('736909338425294899').send('**' + member.user.username + '** has joined the server!')
-        .then(send("We hope you have brought pizza with you!"))
+    client.channels.cache.get('736909338425294899').send("Welcome" + "<@" + member.id + ">" + "We hope you brought :pizza:")
 })
 
 
