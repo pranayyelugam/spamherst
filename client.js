@@ -71,7 +71,7 @@ function processCommand(message) {
         message.reply('there was an error trying to execute that command!');
     }
 
-    /*if (primaryCommand == "createbadge") {
+    /*if (commandName == "createbadge") {
         // !createBadge badgename badgecolor
         if (message.member.hasPermission('MANAGE_GUILD')) {
             if (arguments.length < 0) return
@@ -93,7 +93,7 @@ function processCommand(message) {
             message.react('👎')
         }
     }*/
-    if (primaryCommand == "addbadge") {
+    if (commandName == "addbadge") {
         // addBadge badgeName || used by users themselves
         if (arguments.length < 0) return
         if (arguments.length > 2) {
@@ -148,7 +148,7 @@ function processCommand(message) {
             }
         }
     }
-    if (primaryCommand == "addbadgesforall") {
+    if (commandName == "addbadgesforall") {
         // addBadgesForAll badgeName
         if (arguments.length < 0) return
         if (arguments.length > 1) {
