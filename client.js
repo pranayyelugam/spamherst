@@ -39,103 +39,104 @@ function processCommand(message) {
     const primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
     const arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
 
-    switch (primaryCommand) {
-        case "createBadge":
-            // !createBadge badgename badgecolor
-            if (message.member.hasPermission('MANAGE_GUILD')) {
-                if (arguments.length < 0) return
-                if (arguments.length > 2) {
-                    message.channel.send("Please enter the command correctly. Check #general-info for help")
-                    return
-                }
-                guild.roles.create({
-                    data: {
-                        name: arguments[0],
-                        color: arguments[1]
-                    }
-                }).then(console.log("Employed role successfully created for user: " + message.author))
-                    .catch(console.error("Employed role can't be created for: " + message.author))
-                message.react('👍')
-            }
-            else {
-                message.channel.send("You do not have the permission to create a role").then(sentMessage => {
-                    sentMessage.react('👎');
-                });
-            }
-        case "addBadge":
-            // addBadge badgeName || used by users themselves
+    if (primaryCommand == "createBadge") {
+        // !createBadge badgename badgecolor
+        if (message.member.hasPermission('MANAGE_GUILD')) {
             if (arguments.length < 0) return
             if (arguments.length > 2) {
                 message.channel.send("Please enter the command correctly. Check #general-info for help")
                 return
             }
-            if (arguments.length == 1) {
-                message.guild.members.fetch(message.author)
-                    .then(member => {
-                        if (member.roles.cache.some(role => role.name === arguments[0])) {
-                            message.channel.send("You already have the " + arguments[0] + " badge :(").then(sentMessage => {
-                                sentMessage.react('👎');
-                            });
-                        } else {
-                            const role = guild.roles.cache.find(role => role.name === arguments[0])
-                            if (!role) return console.error("404: role not found")
-                            if (badgesAllowedToAddByUsers(arguments[0])) {
-                                member.roles.add(role)
-                                message.react('👍')
-                            }
-                            else {
-                                message.channel.send("You don't have the access to the " + arguments[0] + " badge")
-                            }
-                        }
-                    })
-            }
-            if (arguments.length == 2) {
-                // addBadge badgeName @person || used by mods
-                const user = message.mentions.users.first()
-                const member = message.guild.member(user)
-                if (message.member.hasPermission('MANAGE_GUILD')) {
+            guild.roles.create({
+                data: {
+                    name: arguments[0],
+                    color: arguments[1]
+                }
+            }).then(console.log("Employed role successfully created for user: " + message.author))
+                .catch(console.error("Employed role can't be created for: " + message.author))
+            message.react('👍')
+        }
+        else {
+            message.channel.send("You do not have the permission to create a role").then(sentMessage => {
+                sentMessage.react('👎');
+            });
+        }
+    }
+    if (primaryCommand == "addBadge") {
+        // addBadge badgeName || used by users themselves
+        if (arguments.length < 0) return
+        if (arguments.length > 2) {
+            message.channel.send("Please enter the command correctly. Check #general-info for help")
+            return
+        }
+        if (arguments.length == 1) {
+            message.guild.members.fetch(message.author)
+                .then(member => {
                     if (member.roles.cache.some(role => role.name === arguments[0])) {
-                        message.channel.send("You already have the Employed badge :(").then(sentMessage => {
+                        message.channel.send("You already have the " + arguments[0] + " badge :(").then(sentMessage => {
                             sentMessage.react('👎');
                         });
                     } else {
                         const role = guild.roles.cache.find(role => role.name === arguments[0])
                         if (!role) return console.error("404: role not found")
-                        member.roles.add(role)
-                        message.react('👍')
+                        if (badgesAllowedToAddByUsers(arguments[0])) {
+                            member.roles.add(role)
+                            message.react('👍')
+                        }
+                        else {
+                            message.channel.send("You don't have the access to the " + arguments[0] + " badge")
+                        }
                     }
-                }
-                else {
-                    message.channel.send("You do not have the permission to add a role").then(sentMessage => {
+                })
+        }
+        if (arguments.length == 2) {
+            // addBadge badgeName @person || used by mods
+            const user = message.mentions.users.first()
+            const member = message.guild.member(user)
+            if (message.member.hasPermission('MANAGE_GUILD')) {
+                if (member.roles.cache.some(role => role.name === arguments[0])) {
+                    message.channel.send("You already have the  " + arguments[0] + "  badge :(").then(sentMessage => {
                         sentMessage.react('👎');
                     });
+                } else {
+                    const role = guild.roles.cache.find(role => role.name === arguments[0])
+                    if (!role) return console.error("404: role not found")
+                    member.roles.add(role)
+                    message.react('👍')
                 }
             }
-        case "addBadgesForAll":
-            // addBadgesForAll badgeName
-            if (arguments.length < 0) return
-            if (arguments.length > 1) {
-                message.channel.send("Please enter the command correctly. Check #general-info for help")
-                return
-            }
-            if (message.member.hasPermission('MANAGE_GUILD')) {
-                const role = guild.roles.cache.find(role => role.name === arguments[0])
-                if (!role) return console.error("404: role not found")
-                guild.members.fetch().then(members => {
-                    members.forEach(m => {
-                        m.roles.add(role)
-                    })
-
-                })
-                message.react('👍')
-            }
             else {
-                message.channel.send("You do not have the permission to create a role").then(sentMessage => {
+                message.channel.send("You do not have the permission to add a role").then(sentMessage => {
                     sentMessage.react('👎');
                 });
             }
-
+        }
     }
+    if (primaryCommand == "addBadgesForAll") {
+        // addBadgesForAll badgeName
+        if (arguments.length < 0) return
+        if (arguments.length > 1) {
+            message.channel.send("Please enter the command correctly. Check #general-info for help")
+            return
+        }
+        if (message.member.hasPermission('MANAGE_GUILD')) {
+            const role = guild.roles.cache.find(role => role.name === arguments[0])
+            if (!role) return console.error("404: role not found")
+            guild.members.fetch().then(members => {
+                members.forEach(m => {
+                    m.roles.add(role)
+                })
+
+            })
+            message.react('👍')
+        }
+        else {
+            message.channel.send("You do not have the permission to create a role").then(sentMessage => {
+                sentMessage.react('👎');
+            });
+        }
+    }
+
 }
 
 function greet(member) {
