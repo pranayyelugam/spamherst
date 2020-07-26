@@ -54,6 +54,8 @@ function processCommand(message) {
     if (!client.commands.has(commandName)) return
 
     const command = client.commands.get(commandName)
+    console.log(arguments)
+    console.log(arguments.length)
     if (command.args && !arguments.length) {
         let reply = `You didn't provide any arguments, ${message.author}!`;
         if (command.usage) {
