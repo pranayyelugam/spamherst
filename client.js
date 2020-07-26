@@ -38,7 +38,7 @@ client.on('guildMemberAdd', member => {
     greet(member)
 
     // add role UMass 
-    const guild = client.guilds.cache.get(guildId);
+    const guild = client.guilds.cache.get(config.guildId);
     if (!guild) return console.error("404: guild with ID", guildId, "not found");
 
     const role = guild.roles.cache.get(config.rolesIds.umass);
