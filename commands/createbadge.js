@@ -5,7 +5,7 @@ module.exports = {
     args: true,
     usage: '<role>',
     description: 'CreateBadge!',
-    execute(message, args) {
+    execute(message, arguments) {
         const guild = message.client.guilds.cache.get(guildId)
 
         if (message.member.hasPermission('MANAGE_GUILD')) {
