@@ -54,7 +54,7 @@ function processCommand(message) {
     if (!client.commands.has(commandName)) return
 
     const command = client.commands.get(commandName)
-    if (command.args && !args.length) {
+    if (command.args && !arguments.length) {
         let reply = `You didn't provide any arguments, ${message.author}!`;
         if (command.usage) {
             reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
