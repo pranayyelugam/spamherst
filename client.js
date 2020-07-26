@@ -46,7 +46,7 @@ function processCommand(message) {
 
     const command = message.content.substr(1)
     const splitCommand = command.split(/ +/) // Split the message up in to pieces for each space
-    const primaryCommand = splitCommand[0].shift().toLowerCase() // The first word directly after the exclamation is the command
+    const primaryCommand = splitCommand.shift().toLowerCase() // The first word directly after the exclamation is the command
     const arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
 
     if (!client.commands.has(primaryCommand)) return;
