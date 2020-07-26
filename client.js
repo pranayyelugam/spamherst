@@ -15,8 +15,13 @@ client.on('message', msg => {
 })
 
 client.on('guildMemberAdd', member => {
-    client.channels.cache.get('736909338425294899').send("Welcome" + "<@" + member.id + ">" + "We hope you brought :pizza:")
+    // welcome message
+    client.channels.cache.get('736909338425294899').send("Welcome" + "<@" + member.id + ">" + ", We hope you brought :pizza:")
+
+    // add role
+    member.addRole(member.guild.roles.find(role => role.id == "736909983773491242"));
 })
+
 
 
 
