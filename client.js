@@ -39,12 +39,4 @@ client.on('guildMemberAdd', member => {
 
 
 
-
-client.on('messageUpdate', async(o))
-
-
-
-
-
-
 client.login(config.DISCORD_BOT.TOKEN)
