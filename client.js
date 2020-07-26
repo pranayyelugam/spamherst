@@ -62,7 +62,10 @@ function processCommand(message) {
             // !createrole Employed BLUE
             if (message.member.hasPermission('MANAGE_GUILD')) {
                 if (arguments.length < 0) return
-                if (arguments.length > 2) message.channel.send("Please enter the command correctly. Check #general-info for help")
+                if (arguments.length > 2) {
+                    message.channel.send("Please enter the command correctly. Check #general-info for help")
+                    return
+                }
                 guild.roles.create({
                     data: {
                         name: arguments[0],
@@ -79,7 +82,10 @@ function processCommand(message) {
             }
         case "addRole":
             if (arguments.length < 0) return
-            if (arguments.length > 1) message.channel.send("Please enter the command correctly. Check #general-info for help")
+            if (arguments.length > 1) {
+                message.channel.send("Please enter the command correctly. Check #general-info for help")
+                return
+            }
             if (arguments[0] == "Employed") {
                 message.guild.members.fetch(message.author)
                     .then(member => {
