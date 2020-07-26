@@ -47,17 +47,16 @@ function processCommand(message) {
     const guild = client.guilds.cache.get(guildId)
 
     const wholeCommand = message.content.substr(1)
-    const args = message.content.slice(prefix.length).trim().split(' ');
-    const splitCommand = wholeCommand.split(" ") // Split the message up in to pieces for each space
-    const commandName = splitCommand.shift().toLowerCase() // The first word directly after the exclamation is the command
+    const splitCommand = wholeCommand.split(/ +/) // Split the message up in to pieces for each space
+    const commandName = splitCommand[0].toLowerCase() // The first word directly after the exclamation is the command
     const arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
 
     if (!client.commands.has(commandName)) return
 
     const command = client.commands.get(commandName)
-    console.log(args)
-    console.log(args.length)
-    if (command.args && !args.length) {
+    console.log(arguments)
+    console.log(arguments.length)
+    if (command.args && !arguments.length) {
         let reply = `You didn't provide any arguments, ${message.author}!`;
         if (command.usage) {
             reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
