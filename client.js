@@ -15,7 +15,7 @@ client.on('message', msg => {
         const guild = client.guilds.cache.get(guildID);
         const role = guild.roles.cache.get('736909983773491242')
         if (!role) return console.error("404: role not found")
-        guild.members.forEach(member => {
+        guild.members.fetch().then(member => {
             if (member.id == client.id) { // Prevent bot from responding to its own messages
                 return
             }
