@@ -47,7 +47,7 @@ function processCommand(message) {
     const guild = client.guilds.cache.get(guildId)
 
     const wholeCommand = message.content.substr(1)
-    const splitCommand = wholeCommand.split(/ +/) // Split the message up in to pieces for each space
+    const splitCommand = wholeCommand.split(" ") // Split the message up in to pieces for each space
     const commandName = splitCommand.shift().toLowerCase() // The first word directly after the exclamation is the command
     const arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
 
