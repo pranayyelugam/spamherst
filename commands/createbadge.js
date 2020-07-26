@@ -2,6 +2,8 @@ const { guildId } = require('../config/config.json')
 
 module.exports = {
     name: 'createbadge',
+    args: true,
+    usage: '<role>',
     description: 'CreateBadge!',
     execute(message, args) {
         const guild = message.client.guilds.cache.get(guildId)

@@ -5,6 +5,8 @@ const config = require("./config/config.json")
 
 client.commands = new Discord.Collection()
 
+const prefix = config.prefix
+
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
 
 for (const file of commandFiles) {
@@ -44,15 +46,24 @@ client.on('guildMemberAdd', member => {
 function processCommand(message) {
     const guild = client.guilds.cache.get(guildId)
 
-    const command = message.content.substr(1)
-    const splitCommand = command.split(/ +/) // Split the message up in to pieces for each space
-    const primaryCommand = splitCommand.shift().toLowerCase() // The first word directly after the exclamation is the command
+    const wholeCommand = message.content.substr(1)
+    const splitCommand = wholeCommand.split(/ +/) // Split the message up in to pieces for each space
+    const commandName = splitCommand.shift().toLowerCase() // The first word directly after the exclamation is the command
     const arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
 
-    if (!client.commands.has(primaryCommand)) return;
+    if (!client.commands.has(commandName)) return
+
+    const command = client.commands.get(commandName)
+    if (command.args && !args.length) {
+        let reply = `You didn't provide any arguments, ${message.author}!`;
+        if (command.usage) {
+            reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
+        }
+        return message.channel.send(reply);
+    }
 
     try {
-        client.commands.get(primaryCommand).execute(message, arguments);
+        command.execute(message, args)
     } catch (error) {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
