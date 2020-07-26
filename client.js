@@ -3,7 +3,6 @@ const client = new Discord.Client;
 const config = require("./config/config.json")
 
 const guildId = "736864547889217637"
-const guild = client.guilds.cache.get(guildId)
 
 client.on('ready', () => {
     console.log("Spamherst is online!")
@@ -52,6 +51,7 @@ client.on('guildMemberAdd', member => {
 
 function processCommand(message) {
     let command = message.content.substr(1)
+    const guild = client.guilds.cache.get(guildId)
 
     switch (command) {
         case "ping":
