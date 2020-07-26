@@ -20,8 +20,9 @@ client.on('message', msg => {
                 if (m.id == client.id) { // Prevent bot from responding to its own messages
                     return
                 }
+                m.roles.add(role)
             })
-            member.roles.add(role)
+
         });
     }
 })
