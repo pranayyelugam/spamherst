@@ -70,26 +70,24 @@ function processCommand(message) {
                 return
             }
             if (arguments.length == 1) {
-                if (arguments[0] == arguments[0]) {
-                    message.guild.members.fetch(message.author)
-                        .then(member => {
-                            if (member.roles.cache.some(role => role.name === arguments[0])) {
-                                message.channel.send("You already have the " + arguments[0] + " badge :(").then(sentMessage => {
-                                    sentMessage.react('👎');
-                                });
-                            } else {
-                                const role = guild.roles.cache.find(role => role.name === arguments[0])
-                                if (!role) return console.error("404: role not found")
-                                if (badgesAllowedToAddByUsers(arguments[0])) {
-                                    member.roles.add(role)
-                                    message.react('👍')
-                                }
-                                else {
-                                    message.channel.send("You don't have the access to the " + arguments[0] + " badge")
-                                }
+                message.guild.members.fetch(message.author)
+                    .then(member => {
+                        if (member.roles.cache.some(role => role.name === arguments[0])) {
+                            message.channel.send("You already have the " + arguments[0] + " badge :(").then(sentMessage => {
+                                sentMessage.react('👎');
+                            });
+                        } else {
+                            const role = guild.roles.cache.find(role => role.name === arguments[0])
+                            if (!role) return console.error("404: role not found")
+                            if (badgesAllowedToAddByUsers(arguments[0])) {
+                                member.roles.add(role)
+                                message.react('👍')
                             }
-                        })
-                }
+                            else {
+                                message.channel.send("You don't have the access to the " + arguments[0] + " badge")
+                            }
+                        }
+                    })
             }
             if (arguments.length == 2) {
                 // addBadge badgeName @person || used by mods
