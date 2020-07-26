@@ -11,7 +11,7 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
-    if (message.author == client.user) {
+    if (message.author.bot) {
         return // Prevent bot from responding to its own messages
     }
 
@@ -19,16 +19,18 @@ client.on('message', message => {
         processCommand(message)
     }
 
-    if (msg.content == 'addroles') {
-        const guild = client.guilds.cache.get(guildID);
-        const role = guild.roles.cache.get('736909983773491242')
-        if (!role) return console.error("404: role not found")
-        guild.members.fetch().then(members => {
-            members.forEach(m => {
-                m.roles.add(role)
-            })
+    if (message.member.hasPermission('MANAGE_GUILD')) {
+        if (message.content == 'addroles') {
+            const guild = client.guilds.cache.get(guildID);
+            const role = guild.roles.cache.get('736909983773491242')
+            if (!role) return console.error("404: role not found")
+            guild.members.fetch().then(members => {
+                members.forEach(m => {
+                    m.roles.add(role)
+                })
 
-        });
+            });
+        }
     }
 })
 
