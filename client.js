@@ -2,11 +2,10 @@ const Discord = require('discord.js');
 const client = new Discord.Client;
 const config = require("./config/config.json")
 
-const guildID = "736864547889217637"
 
 client.on('ready', () => {
     console.log("Spamherst is online!")
-    client.channels.cache.get('736913317020434522').send("Spamherst is Online!")
+    client.channels.cache.get(config.channelIds.botLogs).send("Spamherst is Online!")
 })
 
 client.on('message', message => {
@@ -21,8 +20,8 @@ client.on('message', message => {
     // add roles to all the members in the server at once.
     if (message.member.hasPermission('MANAGE_GUILD')) {
         if (message.content == 'addroles') {
-            const guild = client.guilds.cache.get(guildID);
-            const role = guild.roles.cache.get('736909983773491242')
+            const guild = client.guilds.cache.get(config.guildId);
+            const role = guild.roles.cache.get(config.rolesIds.umass)
             if (!role) return console.error("404: role not found")
             guild.members.fetch().then(members => {
                 members.forEach(m => {
@@ -39,10 +38,10 @@ client.on('guildMemberAdd', member => {
     greet(member)
 
     // add role UMass 
-    const guild = client.guilds.cache.get(guildID);
-    if (!guild) return console.error("404: guild with ID", guildID, "not found");
+    const guild = client.guilds.cache.get(guildId);
+    if (!guild) return console.error("404: guild with ID", guildId, "not found");
 
-    const role = guild.roles.cache.get('736909983773491242');
+    const role = guild.roles.cache.get(config.rolesIds.umass);
     if (!role) return console.error("404: role not found")
 
     member.roles.add(role)
@@ -66,8 +65,8 @@ function greet(member) {
         "Welcome <@" + member.id + ">" + ", We hope you brought :pizza:"
     ]
     let value = Math.floor(Math.random() * 3)
-    client.channels.cache.get('736909338425294899').send(greetings[value])
+    client.channels.cache.get(config.channelIds.welcomeChat).send(greetings[value])
 }
 
 
-client.login(config.DISCORD_BOT.TOKEN)
+client.login(config.discord_bot.token)
