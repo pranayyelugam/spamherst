@@ -80,12 +80,15 @@ function processCommand(message) {
                         if (!role) {
                             message.channel.send("Role not found").then(msg => msg.delete({ timeout: 10000 }))
                             message.react('👎')
-                        } if (badgesAllowedToAddByUsers(arguments[0])) {
-                            member.roles.add(role)
-                            message.react('👍')
-                        }
-                        else {
-                            message.channel.send("You don't have the access to the " + arguments[0] + " badge")
+                        } else {
+                            if (badgesAllowedToAddByUsers(arguments[0])) {
+                                member.roles.add(role)
+                                message.react('👍')
+                            }
+                            else {
+                                message.channel.send("You don't have the access to the " + arguments[0] + " badge").then(msg => msg.delete({ timeout: 10000 }))
+                                message.react('👎')
+                            }
                         }
                     }
                 })
