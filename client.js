@@ -18,20 +18,6 @@ client.on('message', message => {
         processCommand(message)
     }
 
-    // add roles to all the members in the server at once.
-    if (message.member.hasPermission('MANAGE_GUILD')) {
-        if (message.content == 'addroles') {
-            const guild = client.guilds.cache.get(guildId)
-            const role = guild.roles.cache.get(config.rolesIds.umass)
-            if (!role) return console.error("404: role not found")
-            guild.members.fetch().then(members => {
-                members.forEach(m => {
-                    m.roles.add(role)
-                })
-
-            });
-        }
-    }
 })
 
 client.on('guildMemberAdd', member => {
@@ -58,7 +44,7 @@ function processCommand(message) {
     let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
 
     switch (primaryCommand) {
-        case "createRole":
+        case "createBadge":
             // !createrole Employed BLUE
             if (message.member.hasPermission('MANAGE_GUILD')) {
                 if (arguments.length < 0) return
@@ -80,7 +66,7 @@ function processCommand(message) {
                     sentMessage.react('👎');
                 });
             }
-        case "addRole":
+        case "addBadge":
             if (arguments.length < 0) return
             if (arguments.length > 1) {
                 message.channel.send("Please enter the command correctly. Check #general-info for help")
@@ -90,17 +76,40 @@ function processCommand(message) {
                 message.guild.members.fetch(message.author)
                     .then(member => {
                         if (member.roles.cache.some(role => role.name === 'Employed')) {
-                            message.channel.send("You already have the Employed badge. :(").then(sentMessage => {
+                            message.channel.send("You already have the Employed badge :(").then(sentMessage => {
                                 sentMessage.react('👎');
                             });
                         } else {
-                            const role = guild.roles.cache.find(role => role.name === 'Employed');
+                            const role = guild.roles.cache.find(role => role.name === 'Employed')
                             if (!role) return console.error("404: role not found")
                             member.roles.add(role)
                             message.react('👍')
                         }
                     })
             }
+        case "addBadgesForAll":
+            if (arguments.length < 0) return
+            if (arguments.length > 1) {
+                message.channel.send("Please enter the command correctly. Check #general-info for help")
+                return
+            }
+            if (message.member.hasPermission('MANAGE_GUILD')) {
+                const role = guild.roles.cache.find(role => role.name === arguments[0])
+                if (!role) return console.error("404: role not found")
+                guild.members.fetch().then(members => {
+                    members.forEach(m => {
+                        m.roles.add(role)
+                    })
+
+                })
+                message.react('👍')
+            }
+            else {
+                message.channel.send("You do not have the permission to create a role").then(sentMessage => {
+                    sentMessage.react('👎');
+                });
+            }
+
     }
 
 
