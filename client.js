@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client;
 const config = require("./config/config.json")
 
+const guildId = "736864547889217637"
 
 client.on('ready', () => {
     console.log("Spamherst is online!")
@@ -20,7 +21,7 @@ client.on('message', message => {
     // add roles to all the members in the server at once.
     if (message.member.hasPermission('MANAGE_GUILD')) {
         if (message.content == 'addroles') {
-            const guild = client.guilds.cache.get(config.guildId);
+            const guild = client.guilds.cache.get(guildId);
             const role = guild.roles.cache.get(config.rolesIds.umass)
             if (!role) return console.error("404: role not found")
             guild.members.fetch().then(members => {
@@ -38,7 +39,7 @@ client.on('guildMemberAdd', member => {
     greet(member)
 
     // add role UMass 
-    const guild = client.guilds.cache.get(config.guildId);
+    const guild = client.guilds.cache.get(guildId);
     if (!guild) return console.error("404: guild with ID", guildId, "not found");
 
     const role = guild.roles.cache.get(config.rolesIds.umass);
