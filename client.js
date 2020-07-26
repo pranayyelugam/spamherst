@@ -104,7 +104,7 @@ function processCommand(message) {
                 }
             }
             else {
-                message.channel.send("You do not have the permission to add a role")..then(msg => msg.delete({ timeout: 10000 }))
+                message.channel.send("You do not have the permission to add a role").then(msg => msg.delete({ timeout: 10000 }))
                 message.react('👎')
             }
         }
