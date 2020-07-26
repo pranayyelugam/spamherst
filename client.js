@@ -52,8 +52,8 @@ function processCommand(message) {
                     name: arguments[0],
                     color: arguments[1]
                 }
-            }).then(console.log("Employed role successfully created for user: " + message.author))
-                .catch(console.error("Employed role can't be created for: " + message.author))
+            }).then(console.log(arguments[0] + " role successfully created for user: " + message.author))
+                .catch(console.error(arguments[0] + " role can't be created for: " + message.author))
             message.react('👍')
         }
         else {
@@ -77,8 +77,10 @@ function processCommand(message) {
                         message.react('👎')
                     } else {
                         const role = guild.roles.cache.find(role => role.name === arguments[0])
-                        if (!role) return console.error("404: role not found")
-                        if (badgesAllowedToAddByUsers(arguments[0])) {
+                        if (!role) {
+                            message.channel.send("Role not found").then(msg => msg.delete({ timeout: 10000 }))
+                            message.react('👎')
+                        } if (badgesAllowedToAddByUsers(arguments[0])) {
                             member.roles.add(role)
                             message.react('👍')
                         }
@@ -98,8 +100,10 @@ function processCommand(message) {
                     message.react('👎')
                 } else {
                     const role = guild.roles.cache.find(role => role.name === arguments[0])
-                    if (!role) return console.error("404: role not found")
-                    member.roles.add(role)
+                    if (!role) {
+                        message.channel.send("Role not found").then(msg => msg.delete({ timeout: 10000 }))
+                        message.react('👎')
+                    } member.roles.add(role)
                     message.react('👍')
                 }
             }
