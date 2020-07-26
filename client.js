@@ -10,14 +10,10 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
-    if (message.author.bot) {
-        return // Prevent bot from responding to its own messages
-    }
-
+    if (message.author.bot) return
     if (message.content.startsWith('!')) {
         processCommand(message)
     }
-
 })
 
 client.on('guildMemberAdd', member => {
@@ -38,14 +34,14 @@ client.on('guildMemberAdd', member => {
 function processCommand(message) {
     const guild = client.guilds.cache.get(guildId)
 
-    let command = message.content.substr(1)
-    let splitCommand = command.split(" ") // Split the message up in to pieces for each space
-    let primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
-    let arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
+    const command = message.content.substr(1)
+    const splitCommand = command.split(" ") // Split the message up in to pieces for each space
+    const primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
+    const arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
 
     switch (primaryCommand) {
         case "createBadge":
-            // !createrole Employed BLUE
+            // !createBadge badgename badgecolor
             if (message.member.hasPermission('MANAGE_GUILD')) {
                 if (arguments.length < 0) return
                 if (arguments.length > 2) {
@@ -67,27 +63,58 @@ function processCommand(message) {
                 });
             }
         case "addBadge":
+            // addBadge badgeName || used by users themselves
             if (arguments.length < 0) return
-            if (arguments.length > 1) {
+            if (arguments.length > 2) {
                 message.channel.send("Please enter the command correctly. Check #general-info for help")
                 return
             }
-            if (arguments[0] == "Employed") {
-                message.guild.members.fetch(message.author)
-                    .then(member => {
-                        if (member.roles.cache.some(role => role.name === 'Employed')) {
-                            message.channel.send("You already have the Employed badge :(").then(sentMessage => {
-                                sentMessage.react('👎');
-                            });
-                        } else {
-                            const role = guild.roles.cache.find(role => role.name === 'Employed')
-                            if (!role) return console.error("404: role not found")
-                            member.roles.add(role)
-                            message.react('👍')
-                        }
-                    })
+            if (arguments.length == 1) {
+                if (arguments[0] == arguments[0]) {
+                    message.guild.members.fetch(message.author)
+                        .then(member => {
+                            if (member.roles.cache.some(role => role.name === arguments[0])) {
+                                message.channel.send("You already have the " + arguments[0] + " badge :(").then(sentMessage => {
+                                    sentMessage.react('👎');
+                                });
+                            } else {
+                                const role = guild.roles.cache.find(role => role.name === arguments[0])
+                                if (!role) return console.error("404: role not found")
+                                if (badgesAllowedToAddByUsers(arguments[0])) {
+                                    member.roles.add(role)
+                                    message.react('👍')
+                                }
+                                else {
+                                    message.channel.send("You don't have the access to the " + arguments[0] + " badge")
+                                }
+                            }
+                        })
+                }
+            }
+            if (arguments.length == 2) {
+                // addBadge badgeName @person || used by mods
+                const user = message.mentions.users.first()
+                const member = message.guild.member(user)
+                if (message.member.hasPermission('MANAGE_GUILD')) {
+                    if (member.roles.cache.some(role => role.name === arguments[0])) {
+                        message.channel.send("You already have the Employed badge :(").then(sentMessage => {
+                            sentMessage.react('👎');
+                        });
+                    } else {
+                        const role = guild.roles.cache.find(role => role.name === arguments[0])
+                        if (!role) return console.error("404: role not found")
+                        member.roles.add(role)
+                        message.react('👍')
+                    }
+                }
+                else {
+                    message.channel.send("You do not have the permission to add a role").then(sentMessage => {
+                        sentMessage.react('👎');
+                    });
+                }
             }
         case "addBadgesForAll":
+            // addBadgesForAll badgeName
             if (arguments.length < 0) return
             if (arguments.length > 1) {
                 message.channel.send("Please enter the command correctly. Check #general-info for help")
@@ -111,24 +138,23 @@ function processCommand(message) {
             }
 
     }
-
-
-    switch (command) {
-        case "ping":
-            message.channel.send("pong")
-
-    }
-
 }
 
 function greet(member) {
-    let greetings = [
+    const greetings = [
         "<@" + member.id + ">" + " just showed up, make some space for them!",
         "<@" + member.id + ">" + " just joined the party! Make some noise everyone",
         "Welcome <@" + member.id + ">" + ", We hope you brought :pizza:"
     ]
-    let value = Math.floor(Math.random() * 3)
+    const value = Math.floor(Math.random() * 3)
     client.channels.cache.get(config.channelIds.welcomeChat).send(greetings[value])
+}
+
+function badgesAllowedToAddByUsers(badgeName) {
+    const badgesAllowed = [
+        'Employed'
+    ]
+    return badgesAllowed.includes(badgeName)
 }
 
 
