@@ -1,4 +1,4 @@
-import { guildId } from '../config/config.json'
+const { guildId } = require('../config/config.json')
 
 module.exports = {
     name: 'createbadge',
