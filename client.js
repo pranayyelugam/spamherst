@@ -3,6 +3,7 @@ const client = new Discord.Client;
 const config = require("./config/config.json")
 
 const guildId = "736864547889217637"
+const guild = client.guilds.cache.get(guildId)
 
 client.on('ready', () => {
     console.log("Spamherst is online!")
@@ -21,7 +22,7 @@ client.on('message', message => {
     // add roles to all the members in the server at once.
     if (message.member.hasPermission('MANAGE_GUILD')) {
         if (message.content == 'addroles') {
-            const guild = client.guilds.cache.get(guildId);
+            const guild = client.guilds.cache.get(guildId)
             const role = guild.roles.cache.get(config.rolesIds.umass)
             if (!role) return console.error("404: role not found")
             guild.members.fetch().then(members => {
@@ -55,6 +56,15 @@ function processCommand(message) {
     switch (command) {
         case "ping":
             message.channel.send("pong")
+        case "employed":
+            guild.roles.create({
+                data: {
+                    name: 'Employed',
+                    color: 'BLUE'
+                }
+            }).then(console.log("Employed role successfully created for user: " + message.author))
+                .catch(console.error("Employed role can't be created for: " + message.author))
+            message.channel.send("Badge added successfully")
     }
 
 }
