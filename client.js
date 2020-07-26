@@ -74,7 +74,7 @@ function processCommand(message) {
             }
             else {
                 message.channel.send("You do not have the permission to create a role").then(sentMessage => {
-                    sentMessage.react(':thumbsdown:');
+                    sentMessage.react('👎');
                 });
             }
         case "addRole":
@@ -85,7 +85,7 @@ function processCommand(message) {
                     .then(member => {
                         if (member.roles.cache.some(role => role.name === 'Employed')) {
                             message.channel.send("You already have the Employed badge. :(").then(sentMessage => {
-                                sentMessage.react(':thumbsdown: ');
+                                sentMessage.react('👎');
                             });
                         } else {
                             const role = guild.roles.cache.find(role => role.name === 'Employed');
