@@ -1,7 +1,11 @@
+import { guildId } from '../config/config.json'
+
 module.exports = {
     name: 'createbadge',
     description: 'CreateBadge!',
     execute(message, args) {
+        const guild = message.client.guilds.cache.get(guildId)
+
         if (message.member.hasPermission('MANAGE_GUILD')) {
             if (arguments.length < 0) return
             if (arguments.length > 2) {
