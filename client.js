@@ -1,5 +1,5 @@
-const Discord = require('discord.js');
-const client = new Discord.Client;
+const Discord = require('discord.js')
+const client = new Discord.Client
 const config = require("./config/config.json")
 
 const guildId = "736864547889217637"
@@ -21,10 +21,10 @@ client.on('guildMemberAdd', member => {
     greet(member)
 
     // add role UMass 
-    const guild = client.guilds.cache.get(guildId);
-    if (!guild) return console.error("404: guild with ID", guildId, "not found");
+    const guild = client.guilds.cache.get(guildId)
+    if (!guild) return console.error("404: guild with ID", guildId, "not found")
 
-    const role = guild.roles.cache.get(config.rolesIds.umass);
+    const role = guild.roles.cache.get(config.rolesIds.umass)
     if (!role) return console.error("404: role not found")
 
     member.roles.add(role)
@@ -57,25 +57,24 @@ function processCommand(message) {
             message.react('👍')
         }
         else {
-            message.channel.send("You do not have the permission to create a role").then(msg => msg.delete({ timeout: 10000 }));
-            message.react('👎');
+            message.channel.send("You do not have the permission to create a role").then(msg => msg.delete({ timeout: 10000 }))
+            message.react('👎')
         }
     }
     if (primaryCommand == "addBadge") {
         // addBadge badgeName || used by users themselves
         if (arguments.length < 0) return
         if (arguments.length > 2) {
-            message.channel.send("Please enter the command correctly. Check #general-info for help")
-            message.react('👎');
+            message.channel.send("Please enter the command correctly. Check #general-info for help").then(msg => msg.delete({ timeout: 10000 }))
+            message.react('👎')
             return
         }
         if (arguments.length == 1) {
             message.guild.members.fetch(message.author)
                 .then(member => {
                     if (member.roles.cache.some(role => role.name === arguments[0])) {
-                        message.channel.send("You already have the " + arguments[0] + " badge :(").then(sentMessage => {
-                            message.react('👎');
-                        });
+                        message.channel.send("You already have the " + arguments[0] + " badge :(").then(msg => msg.delete({ timeout: 10000 }))
+                        message.react('👎')
                     } else {
                         const role = guild.roles.cache.find(role => role.name === arguments[0])
                         if (!role) return console.error("404: role not found")
@@ -95,9 +94,8 @@ function processCommand(message) {
             const member = message.guild.member(user)
             if (message.member.hasPermission('MANAGE_GUILD')) {
                 if (member.roles.cache.some(role => role.name === arguments[0])) {
-                    message.channel.send("You already have the  " + arguments[0] + "  badge :(").then(sentMessage => {
-                        message.react('👎');
-                    });
+                    message.channel.send("You already have the  " + arguments[0] + "  badge :(").then(msg => msg.delete({ timeout: 10000 }))
+                    message.react('👎')
                 } else {
                     const role = guild.roles.cache.find(role => role.name === arguments[0])
                     if (!role) return console.error("404: role not found")
@@ -106,9 +104,8 @@ function processCommand(message) {
                 }
             }
             else {
-                message.channel.send("You do not have the permission to add a role").then(sentMessage => {
-                    message.react('👎')
-                });
+                message.channel.send("You do not have the permission to add a role")..then(msg => msg.delete({ timeout: 10000 }))
+                message.react('👎')
             }
         }
     }
@@ -116,16 +113,15 @@ function processCommand(message) {
         // addBadgesForAll badgeName
         if (arguments.length < 0) return
         if (arguments.length > 1) {
-            message.channel.send("Please enter the command correctly. Check #general-info for help")
+            message.channel.send("Please enter the command correctly. Check #general-info for help").then(msg => msg.delete({ timeout: 10000 }))
             message.react('👎')
             return
         }
         if (message.member.hasPermission('MANAGE_GUILD')) {
             const role = guild.roles.cache.find(role => role.name === arguments[0])
             if (!role) {
-                message.channel.send("Role not found").then(sentMessage => {
-                    message.react('👎');
-                });
+                message.channel.send("Role not found").then(msg => msg.delete({ timeout: 10000 }))
+                message.react('👎')
             }
             guild.members.fetch().then(members => {
                 members.forEach(m => {
@@ -136,9 +132,8 @@ function processCommand(message) {
             message.react('👍')
         }
         else {
-            message.channel.send("You do not have the permission to create a role").then(sentMessage => {
-                message.react('👎');
-            });
+            message.channel.send("You do not have the permission to create a role").then(msg => msg.delete({ timeout: 10000 }))
+            message.react('👎')
         }
     }
 
