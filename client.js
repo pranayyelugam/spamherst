@@ -1,6 +1,16 @@
+const fs = require('fs');
 const Discord = require('discord.js')
 const client = new Discord.Client
 const config = require("./config/config.json")
+
+client.commands = new Discord.Collection()
+
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
+
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`);
+    client.commands.set(command.name, command);
+}
 
 const guildId = "736864547889217637"
 
@@ -35,11 +45,20 @@ function processCommand(message) {
     const guild = client.guilds.cache.get(guildId)
 
     const command = message.content.substr(1)
-    const splitCommand = command.split(" ") // Split the message up in to pieces for each space
-    const primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
+    const splitCommand = command.split(/ +/) // Split the message up in to pieces for each space
+    const primaryCommand = splitCommand[0].shift().toLowerCase() // The first word directly after the exclamation is the command
     const arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
 
-    if (primaryCommand == "createBadge") {
+    if (!client.commands.has(primaryCommand)) return;
+
+    try {
+        client.commands.get(primaryCommand).execute(message, args);
+    } catch (error) {
+        console.error(error);
+        message.reply('there was an error trying to execute that command!');
+    }
+
+    /*if (primaryCommand == "createbadge") {
         // !createBadge badgename badgecolor
         if (message.member.hasPermission('MANAGE_GUILD')) {
             if (arguments.length < 0) return
@@ -60,8 +79,8 @@ function processCommand(message) {
             message.channel.send("You do not have the permission to create a role").then(msg => msg.delete({ timeout: 10000 }))
             message.react('👎')
         }
-    }
-    if (primaryCommand == "addBadge") {
+    }*/
+    if (primaryCommand == "addbadge") {
         // addBadge badgeName || used by users themselves
         if (arguments.length < 0) return
         if (arguments.length > 2) {
@@ -116,7 +135,7 @@ function processCommand(message) {
             }
         }
     }
-    if (primaryCommand == "addBadgesForAll") {
+    if (primaryCommand == "addbadgesforall") {
         // addBadgesForAll badgeName
         if (arguments.length < 0) return
         if (arguments.length > 1) {
