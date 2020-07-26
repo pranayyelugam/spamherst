@@ -4,7 +4,6 @@ const config = require("./config/config.json")
 
 const guildID = "736864547889217637"
 
-
 client.on('ready', () => {
     console.log("Spamherst is online!")
     client.channels.cache.get('736913317020434522').send("Spamherst is Online!")
@@ -19,6 +18,7 @@ client.on('message', message => {
         processCommand(message)
     }
 
+    // add roles to all the members in the server at once.
     if (message.member.hasPermission('MANAGE_GUILD')) {
         if (message.content == 'addroles') {
             const guild = client.guilds.cache.get(guildID);
@@ -36,7 +36,7 @@ client.on('message', message => {
 
 client.on('guildMemberAdd', member => {
     // welcome message | channel_name : welcome=chat
-    client.channels.cache.get('736909338425294899').send("Welcome " + "<@" + member.id + ">" + ", We hope you brought :pizza:")
+    greet(member)
 
     // add role UMass 
     const guild = client.guilds.cache.get(guildID);
@@ -57,6 +57,16 @@ function processCommand(message) {
             message.channel.send("pong")
     }
 
+}
+
+function greet(member) {
+    let greetings = [
+        "<@" + member.id + ">" + " just showed up, make some space for them!",
+        "<@" + member.id + ">" + " just joined the party! Make some noise everyone",
+        "Welcome <@" + member.id + ">" + ", We hope you brought :pizza:"
+    ]
+    let value = Math.floor(Math.random() * 3)
+    client.channels.cache.get('736909338425294899').send(greetings[value])
 }
 
 
