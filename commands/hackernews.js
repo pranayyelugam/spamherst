@@ -1,4 +1,4 @@
-const { guildId, MessageEmbed } = require('../config/config.json')
+const { MessageEmbed } = require('../config/config.json')
 const fetch = require('node-fetch')
 
 module.exports = {
@@ -24,11 +24,11 @@ module.exports = {
             }
             const storiesLength = list.length
 
-            const randomValue = Math.floor(Math.random() * (storiesLength - 1))
+            const randomValue = Math.floor(Math.random() * (storiesLength))
 
             const story = await fetch(URL + list[randomValue] + ".json?print=pretty")
 
-            const embed = new MessageEmbed()
+            const embed = new Discord.MessageEmbed()
                 .setColor('#EFFF00')
                 .setTitle(story.title)
                 .setURL(story.URL)
