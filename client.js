@@ -165,7 +165,7 @@ function processCommand(message) {
                 message.react('👎')
             }
         }
-    }*/
+    }
     if (commandName == "addbadgesforall") {
         // addBadgesForAll badgeName
         if (args.length < 0) return
@@ -193,6 +193,7 @@ function processCommand(message) {
             message.react('👎')
         }
     }
+    */
 
 }
 
