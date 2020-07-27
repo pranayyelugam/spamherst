@@ -39,7 +39,7 @@ module.exports = {
             message.channel.send(embed);
         }
         else {
-            const searchUrl = "https://hn.algolia.com/api/v1/search?query=" + arg[0] + "&tags=story&hitsPerPage=5"
+            const searchUrl = "https://hn.algolia.com/api/v1/search?query=" + args[0] + "&tags=story&hitsPerPage=5"
 
             const list = await fetch(searchUrl).then(response => response.json())
             if (!list.length) {
