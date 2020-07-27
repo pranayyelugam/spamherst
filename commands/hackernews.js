@@ -27,9 +27,7 @@ module.exports = {
 
             const randomValue = Math.floor(Math.random() * (storiesLength))
 
-            const story = await fetch(URL + list[randomValue] + ".json?print=pretty")
-            console.log(URL + list[randomValue] + ".json?print=pretty")
-            console.log(story)
+            const story = await fetch(URL + list[randomValue] + ".json?print=pretty").then(response => response.json())
 
             const embed = new Discord.MessageEmbed()
                 .setColor('#EFFF00')
