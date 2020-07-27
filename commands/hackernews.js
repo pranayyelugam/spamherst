@@ -43,10 +43,10 @@ module.exports = {
             console.log(searchUrl)
             const list = await fetch(searchUrl).then(response => response.json())
             console.log(list.length)
-            if (!list.length) {
+            if (!list.hits.length) {
                 return message.channel.send(`No results found for **${args.join(' ')}**.`)
             }
-            list.forEach(story => {
+            list.hits.forEach(story => {
                 const embed = new Discord.MessageEmbed()
                     .setColor('#EFFF00')
                     .setTitle(story.title)
