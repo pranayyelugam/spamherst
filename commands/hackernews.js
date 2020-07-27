@@ -28,6 +28,7 @@ module.exports = {
             const randomValue = Math.floor(Math.random() * (storiesLength))
 
             const story = await fetch(URL + list[randomValue] + ".json?print=pretty")
+            console.log(URL + list[randomValue] + ".json?print=pretty")
             console.log(story)
 
             const embed = new Discord.MessageEmbed()
@@ -37,7 +38,6 @@ module.exports = {
                 .addFields(
                     { name: 'Definition', value: story.author }
                 )
-
             message.channel.send(embed);
         }
     }
