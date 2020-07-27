@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 20,
     usage: 'random or <search query>',
     description: 'HackerNews!',
-    async execute(message, args) {
+    execute(message, args) {
 
         const TOP_STORIES = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
         const URL = "https://hacker-news.firebaseio.com/v0/item/"

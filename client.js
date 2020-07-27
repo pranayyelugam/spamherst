@@ -22,7 +22,7 @@ client.on('ready', () => {
     client.channels.cache.get(config.channelIds.botLogs).send("Spamherst is Online!")
 })
 
-client.on('message', message => {
+client.on('message', async message => {
     if (message.author.bot) return
     if (message.content.startsWith('!')) {
         processCommand(message)
