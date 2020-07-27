@@ -32,9 +32,9 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
                 .setColor('#EFFF00')
                 .setTitle(story.title)
-                .setURL(story.URL)
+                .setURL(story.url)
                 .addFields(
-                    { name: 'Definition', value: story.author }
+                    { name: 'Definition', value: story.by }
                 )
             message.channel.send(embed);
         }
