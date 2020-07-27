@@ -28,16 +28,12 @@ module.exports = {
             const randomValue = Math.floor(Math.random() * (storiesLength))
 
             const story = await fetch(URL + list[randomValue] + ".json?print=pretty").then(response => response.json())
-            console.log(story)
-            const d = new Date(story.time)
-            const pubDate = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear()
             const embed = new Discord.MessageEmbed()
                 .setColor('#EFFF00')
                 .setTitle(story.title)
                 .setURL(story.url)
                 .addFields(
                     { name: 'Author', value: story.by },
-                    { name: 'Added on', value: pubDate },
                     { name: 'Points', value: story.score }
                 )
             message.channel.send(embed);
