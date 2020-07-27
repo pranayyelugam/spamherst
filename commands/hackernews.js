@@ -42,7 +42,7 @@ module.exports = {
             const searchUrl = "https://hn.algolia.com/api/v1/search?query=" + args[0] + "&tags=story&hitsPerPage=5"
             console.log(searchUrl)
             const list = await fetch(searchUrl).then(response => response.json())
-            console.log(list)
+            console.log(list.length)
             if (!list.length) {
                 return message.channel.send(`No results found for **${args.join(' ')}**.`)
             }
