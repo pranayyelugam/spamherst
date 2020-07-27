@@ -197,12 +197,7 @@ function processCommand(message) {
 }
 
 
-function badgesAllowedToAddByUsers(badgeName) {
-    const badgesAllowed = [
-        'Employed'
-    ]
-    return badgesAllowed.includes(badgeName)
-}
+
 
 
 client.login(config.discord_bot.token)
