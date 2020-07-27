@@ -30,7 +30,7 @@ module.exports = {
                 .setTitle(story.title)
                 .setURL(story.URL)
                 .addFields(
-                    { name: 'Definition', value: story.author, 1024 }
+                    { name: 'Definition', value: story.author }
                 )
             message.channel.send(embed);
         }
