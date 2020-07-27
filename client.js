@@ -196,15 +196,6 @@ function processCommand(message) {
 
 }
 
-function greet(member) {
-    const greetings = [
-        "<@" + member.id + ">" + " just showed up, make some space for them!",
-        "<@" + member.id + ">" + " just joined the party! Make some noise everyone",
-        "Welcome <@" + member.id + ">" + ", We hope you brought :pizza:"
-    ]
-    const value = Math.floor(Math.random() * 3)
-    client.channels.cache.get(config.channelIds.welcomeChat).send(greetings[value])
-}
 
 function badgesAllowedToAddByUsers(badgeName) {
     const badgesAllowed = [
