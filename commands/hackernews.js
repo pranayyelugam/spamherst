@@ -7,7 +7,7 @@ module.exports = {
     cooldown: 20,
     usage: 'random or <search query>',
     description: 'HackerNews!',
-    execute(message, args) {
+    async execute(message, args) {
 
         const TOP_STORIES = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
         const URL = "https://hacker-news.firebaseio.com/v0/item/"
@@ -18,7 +18,7 @@ module.exports = {
             return
         }
         if (args[0] == "random") {
-            const { list } = await fetch(TOP_STORIES).then(response => response.json())
+            const list = await fetch(TOP_STORIES).then(response => response.json())
             console.log(list)
             if (!list.length) {
                 return message.channel.send(`No results found for **${args.join(' ')}**.`)
