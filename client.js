@@ -110,7 +110,7 @@ function processCommand(message) {
             message.channel.send("You do not have the permission to create a role").then(msg => msg.delete({ timeout: 10000 }))
             message.react('👎')
         }
-    }*/
+    }
     if (commandName == "addbadge") {
         // addBadge badgeName || used by users themselves
         if (args.length < 0) return
@@ -165,7 +165,7 @@ function processCommand(message) {
                 message.react('👎')
             }
         }
-    }
+    }*/
     if (commandName == "addbadgesforall") {
         // addBadgesForAll badgeName
         if (args.length < 0) return
