@@ -20,6 +20,7 @@ module.exports = {
         if (args[0] == "random") {
             const { list } = await fetch(TOP_STORIES).then(response => response.json())
             const storiesLength = list.length
+            /*
             const randomValue = Math.floor(Math.random() * (storiesLength - 1))
 
             const story = await fetch(URL + list[randomValue] + ".json?print=pretty")
@@ -31,7 +32,8 @@ module.exports = {
                 .addFields(
                     { name: 'Definition', value: story.author }
                 )
-            message.channel.send(embed);
+                */
+            message.channel.send(storiesLength);
         }
     }
 }
