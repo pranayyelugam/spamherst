@@ -70,4 +70,4 @@ module.exports = {
             return badgesAllowed.includes(badgeName)
         }
     }
-};
+}
