@@ -207,7 +207,4 @@ function greet(member) {
     client.channels.cache.get(config.channelIds.welcomeChat).send(greetings[value])
 }
 
-
-
-
 client.login(config.discord_bot.token)
