@@ -10,15 +10,15 @@ module.exports = {
     description: 'HackerNews!',
     async execute(message, args) {
 
-        const TOP_STORIES = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
-        const URL = "https://hacker-news.firebaseio.com/v0/item/"
-
         if (args.length < 0) return
         if (args.length > 2) {
             message.channel.send("Please enter the command correctly. Check #general-info for help")
             return
         }
         if (args[0] == "random") {
+            const TOP_STORIES = "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
+            const URL = "https://hacker-news.firebaseio.com/v0/item/"
+
             const list = await fetch(TOP_STORIES).then(response => response.json())
             if (!list.length) {
                 return message.channel.send(`No results found for **${args.join(' ')}**.`)
@@ -37,6 +37,27 @@ module.exports = {
                     { name: 'Points', value: story.score }
                 )
             message.channel.send(embed);
+        }
+        else {
+            const searchUrl = "https://hn.algolia.com/api/v1/search?query=" + arg[0] + "&tags=story&hitsPerPage=5"
+
+            const list = await fetch(searchUrl).then(response => response.json())
+            if (!list.length) {
+                return message.channel.send(`No results found for **${args.join(' ')}**.`)
+            }
+            list.forEach(story => {
+                const embed = new Discord.MessageEmbed()
+                    .setColor('#EFFF00')
+                    .setTitle(story.title)
+                    .setURL(story.url)
+                    .addFields(
+                        { name: 'Author', value: story.author },
+                        { name: 'Points', value: story.points },
+                        { name: 'Created at', value: story.created_at }
+                    )
+                message.channel.send(embed);
+            })
+
         }
     }
 }
