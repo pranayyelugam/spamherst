@@ -49,15 +49,14 @@ function processCommand(message) {
     const wholeCommand = message.content.substr(1)
     const splitCommand = wholeCommand.split(/ +/) // Split the message up in to pieces for each space
     const commandName = splitCommand[0].toLowerCase() // The first word directly after the exclamation is the command
-    const arguments = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
+    const args = splitCommand.slice(1) // All other words are args/parameters/options for the command
 
     if (!client.commands.has(commandName)) return
 
     const command = client.commands.get(commandName)
-    console.log(arguments)
-    console.log(arguments.length)
-    if (command.args && !arguments.length) {
-        let reply = `You didn't provide any arguments, ${message.author}!`;
+
+    if (command.args && !args.length) {
+        let reply = `You didn't provide any args, ${message.author}!`;
         if (command.usage) {
             reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
         }
@@ -65,7 +64,7 @@ function processCommand(message) {
     }
 
     try {
-        command.execute(message, arguments)
+        command.execute(message, args)
     } catch (error) {
         console.error(error);
         message.reply('there was an error trying to execute that command!');
@@ -74,18 +73,18 @@ function processCommand(message) {
     /*if (commandName == "createbadge") {
         // !createBadge badgename badgecolor
         if (message.member.hasPermission('MANAGE_GUILD')) {
-            if (arguments.length < 0) return
-            if (arguments.length > 2) {
+            if (args.length < 0) return
+            if (args.length > 2) {
                 message.channel.send("Please enter the command correctly. Check #general-info for help")
                 return
             }
             guild.roles.create({
                 data: {
-                    name: arguments[0],
-                    color: arguments[1]
+                    name: args[0],
+                    color: args[1]
                 }
-            }).then(console.log(arguments[0] + " role successfully created for user: " + message.author))
-                .catch(console.error(arguments[0] + " role can't be created for: " + message.author))
+            }).then(console.log(args[0] + " role successfully created for user: " + message.author))
+                .catch(console.error(args[0] + " role can't be created for: " + message.author))
             message.react('👍')
         }
         else {
@@ -95,46 +94,46 @@ function processCommand(message) {
     }*/
     if (commandName == "addbadge") {
         // addBadge badgeName || used by users themselves
-        if (arguments.length < 0) return
-        if (arguments.length > 2) {
+        if (args.length < 0) return
+        if (args.length > 2) {
             message.channel.send("Please enter the command correctly. Check #general-info for help").then(msg => msg.delete({ timeout: 10000 }))
             message.react('👎')
             return
         }
-        if (arguments.length == 1) {
+        if (args.length == 1) {
             message.guild.members.fetch(message.author)
                 .then(member => {
-                    if (member.roles.cache.some(role => role.name === arguments[0])) {
-                        message.channel.send("You already have the " + arguments[0] + " badge :(").then(msg => msg.delete({ timeout: 10000 }))
+                    if (member.roles.cache.some(role => role.name === args[0])) {
+                        message.channel.send("You already have the " + args[0] + " badge :(").then(msg => msg.delete({ timeout: 10000 }))
                         message.react('👎')
                     } else {
-                        const role = guild.roles.cache.find(role => role.name === arguments[0])
+                        const role = guild.roles.cache.find(role => role.name === args[0])
                         if (!role) {
                             message.channel.send("Role not found").then(msg => msg.delete({ timeout: 10000 }))
                             message.react('👎')
                         } else {
-                            if (badgesAllowedToAddByUsers(arguments[0])) {
+                            if (badgesAllowedToAddByUsers(args[0])) {
                                 member.roles.add(role)
                                 message.react('👍')
                             }
                             else {
-                                message.channel.send("You don't have the access to the " + arguments[0] + " badge").then(msg => msg.delete({ timeout: 10000 }))
+                                message.channel.send("You don't have the access to the " + args[0] + " badge").then(msg => msg.delete({ timeout: 10000 }))
                                 message.react('👎')
                             }
                         }
                     }
                 })
         }
-        if (arguments.length == 2) {
+        if (args.length == 2) {
             // addBadge badgeName @person || used by mods
             const user = message.mentions.users.first()
             const member = message.guild.member(user)
             if (message.member.hasPermission('MANAGE_GUILD')) {
-                if (member.roles.cache.some(role => role.name === arguments[0])) {
-                    message.channel.send("You already have the  " + arguments[0] + "  badge :(").then(msg => msg.delete({ timeout: 10000 }))
+                if (member.roles.cache.some(role => role.name === args[0])) {
+                    message.channel.send("You already have the  " + args[0] + "  badge :(").then(msg => msg.delete({ timeout: 10000 }))
                     message.react('👎')
                 } else {
-                    const role = guild.roles.cache.find(role => role.name === arguments[0])
+                    const role = guild.roles.cache.find(role => role.name === args[0])
                     if (!role) {
                         message.channel.send("Role not found").then(msg => msg.delete({ timeout: 10000 }))
                         message.react('👎')
@@ -150,14 +149,14 @@ function processCommand(message) {
     }
     if (commandName == "addbadgesforall") {
         // addBadgesForAll badgeName
-        if (arguments.length < 0) return
-        if (arguments.length > 1) {
+        if (args.length < 0) return
+        if (args.length > 1) {
             message.channel.send("Please enter the command correctly. Check #general-info for help").then(msg => msg.delete({ timeout: 10000 }))
             message.react('👎')
             return
         }
         if (message.member.hasPermission('MANAGE_GUILD')) {
-            const role = guild.roles.cache.find(role => role.name === arguments[0])
+            const role = guild.roles.cache.find(role => role.name === args[0])
             if (!role) {
                 message.channel.send("Role not found").then(msg => msg.delete({ timeout: 10000 }))
                 message.react('👎')

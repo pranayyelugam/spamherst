@@ -3,24 +3,25 @@ const { guildId } = require('../config/config.json')
 module.exports = {
     name: 'createbadge',
     args: true,
+    cooldown: 5,
     usage: '<role>',
     description: 'CreateBadge!',
-    execute(message, arguments) {
+    execute(message, args) {
         const guild = message.client.guilds.cache.get(guildId)
 
         if (message.member.hasPermission('MANAGE_GUILD')) {
-            if (arguments.length < 0) return
-            if (arguments.length > 2) {
+            if (args.length < 0) return
+            if (args.length > 2) {
                 message.channel.send("Please enter the command correctly. Check #general-info for help")
                 return
             }
             guild.roles.create({
                 data: {
-                    name: arguments[0],
-                    color: arguments[1]
+                    name: args[0],
+                    color: args[1]
                 }
-            }).then(console.log(arguments[0] + " role successfully created for user: " + message.author))
-                .catch(console.error(arguments[0] + " role can't be created for: " + message.author))
+            }).then(console.log(args[0] + " role successfully created for user: " + message.author))
+                .catch(console.error(args[0] + " role can't be created for: " + message.author))
             message.react('👍')
         }
         else {
