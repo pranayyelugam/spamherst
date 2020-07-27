@@ -37,7 +37,7 @@ module.exports = {
                     { name: 'Definition', value: story.author }
                 )
 
-            message.channel.send(storiesLength);
+            message.channel.send(embed);
         }
     }
 }
