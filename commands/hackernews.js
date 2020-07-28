@@ -1,4 +1,3 @@
-const { MessageEmbed } = require('../config/config.json')
 const Discord = require('discord.js')
 const fetch = require('node-fetch')
 
@@ -39,7 +38,7 @@ module.exports = {
             message.channel.send(embed);
         }
         else {
-            const searchUrl = "https://hn.algolia.com/api/v1/search?query=" + args[0] + "&tags=story&hitsPerPage=5"
+            const searchUrl = "https://hn.algolia.com/api/v1/search?query=" + args[0] + "&tags=story&hitsPerPage=3"
             console.log(searchUrl)
             const list = await fetch(searchUrl).then(response => response.json())
             console.log(list.length)
