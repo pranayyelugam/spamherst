@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Discord = require('discord.js')
-const client = new Discord.Client
+const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] })
 const config = require("./config/config.json")
 
 client.commands = new Discord.Collection()
@@ -45,11 +45,11 @@ client.on('guildMemberAdd', member => {
 })
 
 client.on("guildMemberUpdate", function (oldMember, newMember) {
-    console.error(`a guild member changes - i.e. new role, removed role, nickname.`);
+    console.error(`a guild member changes - i.e. new role, removed role, nickname.`)
 })
 
 client.on("messageReactionAdd", function (messageReaction, user) {
-    console.log(`a reaction is added to a message`);
+    console.log(`a reaction is added to a message`)
 })
 
 function processCommand(message) {
