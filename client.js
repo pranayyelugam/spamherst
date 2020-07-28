@@ -46,7 +46,11 @@ client.on('guildMemberAdd', member => {
 
 client.on("guildMemberUpdate", function (oldMember, newMember) {
     console.error(`a guild member changes - i.e. new role, removed role, nickname.`);
-});
+})
+
+client.on("messageReactionAdd", function (messageReaction, user) {
+    console.log(`a reaction is added to a message`);
+})
 
 function processCommand(message) {
     const guild = client.guilds.cache.get(guildId)
