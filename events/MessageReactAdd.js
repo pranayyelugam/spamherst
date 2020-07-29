@@ -1,6 +1,6 @@
 
-function addReaction(messageReaction, user) {
-    const user = user
+function addReaction(messageReaction, User) {
+    const user = User
     const message = messageReaction.message
     const messageId = messageReaction.message.id
     const reaction = messageReaction.emoji.name
