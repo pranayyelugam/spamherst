@@ -1,7 +1,7 @@
 const config = require("../config/config.json")
 const client = require('../client.js')
 const { PollsManager } = require('./PollsManager.js')
-
+const Discord = require('discord.js')
 client.commands = new Discord.Collection()
 
 const prefix = config.prefix
