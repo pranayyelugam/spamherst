@@ -1,5 +1,5 @@
 const { hasRole } = require('../helpers.js')
-const { ChannelToggleRepository } = require('..constants.js')
+const { ChannelToggleRepository } = require('../constants.js')
 
 function addReaction(messageReaction, User) {
     const user = User
