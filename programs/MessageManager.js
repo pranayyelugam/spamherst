@@ -1,5 +1,5 @@
-const config = require("./config/config.json")
-const client = require('./client.js')
+const config = require("../config/config.json")
+const client = require('../client.js')
 const { PollsManager } = require('./PollsManager.js')
 
 client.commands = new Discord.Collection()

@@ -1,5 +1,5 @@
-const config = require("./config/config.json")
-const client = require('./client.js')
+const config = require("../config/config.json")
+const client = require('../client.js')
 
 function memberJoin(member) {
     // welcome message | channel_name : welcome=chat
