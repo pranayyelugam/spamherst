@@ -16,7 +16,7 @@ client.on('message', message => { routeMessage(message) })
 client.on('guildMemberAdd', member => { memberJoin(member) })
 
 client.on("guildMemberUpdate", function (oldMember, newMember) {
-    console.error(`a guild member changes - i.e. new role, removed role, nickname.`)
+    //console.error(`a guild member changes - i.e. new role, removed role, nickname.`)
 })
 
 client.on("messageReactionAdd", function (messageReaction, user) {

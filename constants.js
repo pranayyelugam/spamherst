@@ -1,79 +1,79 @@
 
 const ChannelToggleRepository = [
     {
-        messageId: "737802281281650709",
+        messageId: "738155758536884245",
         emoji: "📚",
-        channelId: "737760011115298828",
+        channelId: "703008183555457153",
         channelName: "coursework",
         roleId: "UMass"
     },
     {
-        messageId: "737802281281650709",
+        messageId: "738155758536884245",
         emoji: "💰",
-        channelId: "737760133232197793",
+        channelId: "703004946030788618",
         channelName: "tuition",
         roleId: "UMass"
     },
     {
-        messageId: "737802281281650709",
+        messageId: "738155758536884245",
         emoji: "💸",
-        channelId: "737760214736175125",
+        channelId: "703007737231048744",
         channelName: "loan",
         roleId: "UMass"
     },
     {
-        messageId: "737802281281650709",
+        messageId: "738155758536884245",
         emoji: "🎟️",
-        channelId: "737760231546945647",
+        channelId: "703004963533750313",
         channelName: "visa",
         roleId: "UMass"
     },
     {
-        messageId: "737802281281650709",
+        messageId: "738155758536884245",
         emoji: "💻",
-        channelId: "737760277394620426",
+        channelId: "702996854471786547",
         channelName: "leetcode",
         roleId: "UMass"
     },
     {
-        messageId: "737802281281650709",
+        messageId: "738155758536884245",
         emoji: "🏘️",
-        channelId: "737760339965509682",
+        channelId: "702997553515462795",
         channelName: "housing",
         roleId: "UMass"
     },
     {
-        messageId: "737802281281650709",
+        messageId: "738155758536884245",
         emoji: "🎲",
-        channelId: "737760360962195466",
+        channelId: "703001395313377341",
         channelName: "politics",
         roleId: "UMass"
     },
     {
-        messageId: "737802281281650709",
+        messageId: "738155758536884245",
         emoji: "🐵",
-        channelId: "738057006765834361",
+        channelId: "703007688165949460",
         channelName: "memes",
         roleId: "UMass"
     },
     {
-        messageId: "737802281281650709",
+        messageId: "738155758536884245",
         emoji: "🇲",
-        channelId: "737760532328874024",
+        channelId: "703000747867897918",
         channelName: "math",
         roleId: "UMass"
     },
     {
-        messageId: "737802281281650709",
+        messageId: "738155758536884245",
         emoji: "🇵",
-        channelId: "737760564239138990",
+        channelId: "703000715475288276",
         channelName: "personal-projects",
         roleId: "UMass"
     },
     {
-        messageId: "737802281281650709",
+        messageId: "738155758536884245",
         emoji: "👨🏻‍🎓",
-        channelId: "737760618953703544",
+        channelId: "703123779219488788",
         channelName: "final-year-peeps",
         roleId: "UMass"
     }
