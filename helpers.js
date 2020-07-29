@@ -1,5 +1,3 @@
-const Discord, { } = require('discord.js')
-
 
 function hasRole(member, roleName) {
     return !!member.roles.cache.find((r) => r.name === roleName);
