@@ -3,13 +3,13 @@
         "token": "NzM2ODYzNTI5MTI2MDY4MjY0.Xx0_ow.WpDQC6N3zlUOpX_gHOd7e9woqmU"
     },
     "rolesIds": {
-        "umass": "736909983773491242"
+        "umass": "738147630382710816"
     },
     "channelIds": {
-        "welcomeChat": "736909338425294899",
-        "botLogs": "736913317020434522",
+        "welcomeChat": "736975458360623134",
+        "botLogs": "738116841330704446",
         "commandLogs": "737025645728497784"
     },
-    "guildId": "736864547889217637",
+    "guildId": "702996369165648023",
     "prefix": "!"
 }
