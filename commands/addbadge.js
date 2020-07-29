@@ -54,8 +54,11 @@ module.exports = {
                     if (!role) {
                         message.channel.send("Role not found").then(msg => msg.delete({ timeout: 10000 }))
                         message.react('👎')
-                    } member.roles.add(role)
-                    message.react('👍')
+                    }
+                    else {
+                        member.roles.add(role)
+                        message.react('👍')
+                    }
                 }
             }
             else {
