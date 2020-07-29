@@ -12,7 +12,7 @@ async function addReaction(messageReaction, User) {
 
     console.log(messageReaction);
 
-    console.log(message + " --- " + messageId + " --- " + reaction)
+    console.log(message + " --- " + messageId + " --- " + pureEmoji)
 
 
 
