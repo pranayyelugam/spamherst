@@ -10,16 +10,9 @@ async function addReaction(messageReaction, User) {
     const channel = messageReaction.message.channel
     const guild = channel.guild
 
-    console.log(messageReaction);
-
-    console.log(message + " --- " + messageId + " --- " + pureEmoji)
-
-
-
     const guildMember = guild.members.cache.find(
         (m) => m.id == user.id
     )
-
     const toggle = ChannelToggleRepository.find((c) => (c.messageId === messageId && c.emoji === reaction))
     const communityChannel = guild.channels.cache.find(
         (c) => c.id === toggle.channelId

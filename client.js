@@ -116,3 +116,5 @@ function greet(member) {
 }
 
 client.login(config.discord_bot.token)
+
+module.exports = client

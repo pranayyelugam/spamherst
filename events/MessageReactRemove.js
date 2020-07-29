@@ -1,4 +1,4 @@
-const { hasRole } = require('../helpers.js')
+const { hasRole, textLog } = require('../helpers.js')
 const { ChannelToggleRepository } = require('../constants.js')
 
 async function removeReaction(messageReaction, User) {
@@ -9,11 +9,6 @@ async function removeReaction(messageReaction, User) {
     const pureEmoji = messageReaction.emoji.toString()
     const channel = messageReaction.message.channel
     const guild = channel.guild
-
-    console.log(messageReaction);
-
-    console.log(message + " --- " + messageId + " --- " + pureEmoji)
-
 
 
     const guildMember = guild.members.cache.find(
@@ -26,9 +21,13 @@ async function removeReaction(messageReaction, User) {
     )
 
     if (hasRole(guildMember, "UMass")) {
-        await communityChannel.updateOverwrite(user.id, {
-            VIEW_CHANNEL: false
-        })
+        if (communityChannel === undefined) {
+            textLog(
+                `I can't find this channel <#${communityChannel.id}>. Has it been deleted?`
+            );
+            return;
+        }
+        await communityChannel.permissionOverwrites.get(user.id).delete();
     }
     else {
         console.log("doesn't have UMass tag. Ask @support to get one")
