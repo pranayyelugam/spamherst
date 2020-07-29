@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
 const fs = require('fs')
+const path = require('path');
 
 const config = require("../config/config.json")
 const client = require('../client.js')
@@ -9,30 +10,38 @@ client.commands = new Discord.Collection()
 
 const prefix = config.prefix
 const cooldowns = new Discord.Collection()
-const guildId = "736864547889217637"
-const commandFiles = fs.readdirSync('../commands').filter(file => file.endsWith('.js'))
+
+const commandDir = path.join(__dirname, '../commands')
+const commandFiles = fs.readdirSync(commandDir).filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-    const command = require(`../commands/${file}`)
-    client.commands.set(command.name, command)
+    const command = require(`${commandDir}/${file}`);
+    client.commands.set(command.name, command);
 }
 
 function routeMessage(message) {
     if (message.author.bot) return
-    if (message.content.startsWith('!')) {
-        processCommand(message)
-    } else {
-        const channel = message.channel
-        switch (channel) {
-            case "polls":
-                PollsManager(message)
-                break;
-        }
+    const channel = message.channel
+    const words = message.content.split(/\s+/)
+    const firstWord = words[0]
+    switch (channel.name) {
+        case "chat":
+            if (firstWord === "!hackernews") {
+                processCommand(message)
+            }
+            break;
+        case "bot-commands":
+            if (message.content.startsWith('!')) {
+                processCommand(message)
+            }
+            break;
+        case "polls":
+            PollsManager(message)
+            break;
     }
 }
 
 function processCommand(message) {
-    const guild = client.guilds.cache.get(guildId)
 
     const wholeCommand = message.content.substr(1)
     const splitCommand = wholeCommand.split(/ +/) // Split the message up in to pieces for each space

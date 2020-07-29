@@ -6,7 +6,7 @@ function memberJoin(member) {
     greet(member)
 
     // add role UMass 
-    const guild = client.guilds.cache.get(guildId)
+    const guild = member.client.guilds.cache.get(config.guildId)
     if (!guild) return console.error("404: guild with ID", guildId, "not found")
 
     const role = guild.roles.cache.get(config.rolesIds.umass)
@@ -22,7 +22,8 @@ function greet(member) {
         "Welcome <@" + member.id + ">" + ", We hope you brought :pizza:"
     ]
     const value = Math.floor(Math.random() * 3)
-    client.channels.cache.get(config.channelIds.welcomeChat).send(greetings[value])
+    console.log(client.channels)
+    member.client.channels.cache.get(config.channelIds.welcomeChat).send(greetings[value])
 }
 
 module.exports = { memberJoin }

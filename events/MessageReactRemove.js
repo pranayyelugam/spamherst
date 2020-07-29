@@ -10,12 +10,15 @@ async function removeReaction(messageReaction, User) {
     const channel = messageReaction.message.channel
     const guild = channel.guild
 
-
+    if (user.bot) return
     const guildMember = guild.members.cache.find(
         (m) => m.id == user.id
     )
 
     const toggle = ChannelToggleRepository.find((c) => (c.messageId === messageId && c.emoji === reaction))
+    if (toggle === undefined) {
+        return;
+    }
     const communityChannel = guild.channels.cache.find(
         (c) => c.id === toggle.channelId
     )
