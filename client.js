@@ -1,4 +1,3 @@
-const fs = require('fs');
 const Discord = require('discord.js')
 const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] })
 const config = require("./config/config.json")
