@@ -68,7 +68,9 @@ module.exports = {
         }
         function badgesAllowedToAddByUsers(badgeName) {
             const badgesAllowed = [
-                'Employed'
+                'Employed',
+                'Online',
+                'Spring'
             ]
             return badgesAllowed.includes(badgeName)
         }

@@ -30,7 +30,7 @@ async function removeReaction(messageReaction, User) {
             );
             return;
         }
-        await communityChannel.permissionOverwrites.get(user.id).delete();
+        await communityChannel.permissionOverwrites.get(user.id).delete()
     }
     else {
         console.log("doesn't have UMass tag. Ask @support to get one")
