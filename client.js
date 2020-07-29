@@ -2,6 +2,7 @@ const fs = require('fs');
 const Discord = require('discord.js')
 const client = new Discord.Client({ partials: ['MESSAGE', 'REACTION'] })
 const config = require("./config/config.json")
+const { reactionAdd } = require("./events/MessageReactAdd.js")
 
 client.commands = new Discord.Collection()
 
@@ -49,7 +50,7 @@ client.on("guildMemberUpdate", function (oldMember, newMember) {
 })
 
 client.on("messageReactionAdd", function (messageReaction, user) {
-    console.log(`a reaction is added to a message`)
+    reactionAdd(messageReaction, user)
 })
 
 function processCommand(message) {
