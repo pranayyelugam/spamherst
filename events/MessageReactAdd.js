@@ -1,7 +1,7 @@
 const { hasRole } = require('../helpers.js')
 const { ChannelToggleRepository } = require('../constants.js')
 
-function addReaction(messageReaction, User) {
+async function addReaction(messageReaction, User) {
     const user = User
     const message = messageReaction.message
     const messageId = messageReaction.message.id
@@ -26,7 +26,7 @@ function addReaction(messageReaction, User) {
     )
 
     if (hasRole(guildMember, "UMass")) {
-        communityChannel.updateOverWrite(user.id, {
+        await communityChannel.updateOverwrite(user.id, {
             VIEW_CHANNEL: true
         })
     }
