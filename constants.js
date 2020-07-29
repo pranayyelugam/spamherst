@@ -2,7 +2,7 @@
 const ChannelToggleRepository = [
     {
         messageId: "737802281281650709",
-        emoji: ":books:",
+        emoji: "📚",
         channelId: "737760011115298828",
         channelName: "coursework",
         roleId: "UMass"
