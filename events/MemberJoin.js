@@ -4,7 +4,8 @@ const client = require('../client.js')
 function memberJoin(member) {
     // welcome message | channel_name : welcome=chat
     greet(member)
-
+    member.client.channels.cache.get(config.channelIds.welcomeChat).send(
+        "Now go check " + "<#" + config.channelIds.generalInfo + ">" + " for more information about this server")
     // add role UMass 
     const guild = member.client.guilds.cache.get(config.guildId)
     if (!guild) return console.error("404: guild with ID", guildId, "not found")

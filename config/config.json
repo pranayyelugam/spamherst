@@ -8,7 +8,8 @@
     "channelIds": {
         "welcomeChat": "736975458360623134",
         "botLogs": "738116841330704446",
-        "commandLogs": "737025645728497784"
+        "commandLogs": "737025645728497784",
+        "generalInfo": "738117180947693709"
     },
     "guildId": "702996369165648023",
     "prefix": "!"
