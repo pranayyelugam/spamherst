@@ -1,6 +1,6 @@
 {
     "discord_bot": {
-        "token": ""
+        "token": "process.env.token"
     },
     "rolesIds": {
         "umass": "738147630382710816"
