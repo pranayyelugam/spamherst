@@ -1,7 +1,7 @@
 const config = require("../config/config.json")
 const client = require('../client.js')
 
-function memberJoin(member) {
+async function memberJoin(member) {
     // welcome message | channel_name : welcome=chat
     greet(member)
     member.client.channels.cache.get(config.channelIds.welcomeChat).send(
@@ -23,7 +23,6 @@ function greet(member) {
         "Welcome <@" + member.id + ">" + ", We hope you brought :pizza:"
     ]
     const value = Math.floor(Math.random() * 3)
-    console.log(client.channels)
     member.client.channels.cache.get(config.channelIds.welcomeChat).send(greetings[value])
 }
 

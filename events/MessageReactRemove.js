@@ -1,5 +1,7 @@
 const { hasRole, textLog } = require('../helpers.js')
 const { ChannelToggleRepository } = require('../constants.js')
+const ChannelSchema = require('../database/Schemas/ChannelSchema.js')
+
 
 async function removeReaction(messageReaction, User) {
     const user = User
@@ -19,8 +21,13 @@ async function removeReaction(messageReaction, User) {
     if (toggle === undefined) {
         return;
     }
+
+    const toggleChannel = await ChannelSchema.find({
+        channelName: toggle.channelName
+    })
+    const [{ channelId, channelName }] = toggleChannel
     const communityChannel = guild.channels.cache.find(
-        (c) => c.id === toggle.channelId
+        (c) => c.id === channelId
     )
 
     if (hasRole(guildMember, "UMass")) {

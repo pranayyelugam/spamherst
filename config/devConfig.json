@@ -1,0 +1,21 @@
+{
+    "discord_bot": {
+        "token": "NzM4MTUxNzM4Njk1MjIxMzc4.XyHvYA.6zzaNbS-5G9Pg0O_Ljqsi80iKxg"
+    },
+    "rolesIds": {
+        "umass": "736909983773491242",
+        "boulders": "801423424487424001",
+        "puffton": "801424005936578582",
+        "cs1": "801435887292252171",
+        "cs2": "801435887883386890"
+    },
+    "channelIds": {
+        "welcomeChat": "736909338425294899",
+        "botLogs": "736913317020434522",
+        "commandLogs": "737025645728497784",
+        "community": "737759912196702269",
+        "courses": "801607550570856459"
+    },
+    "guildId": "736864547889217637",
+    "prefix": "!"
+}

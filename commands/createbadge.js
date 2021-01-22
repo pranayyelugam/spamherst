@@ -1,4 +1,6 @@
 const { guildId } = require('../config/config.json')
+const rolesSchema = require('../database/Schemas/RolesSchema');
+
 
 module.exports = {
     name: 'createbadge',
@@ -15,13 +17,26 @@ module.exports = {
                 message.channel.send("Please enter the command correctly. Check #general-info for help")
                 return
             }
-            guild.roles.create({
-                data: {
-                    name: args[0],
-                    color: args[1]
-                }
-            }).then(console.log(args[0] + " role successfully created for user: " + message.author))
-                .catch(console.error(args[0] + " role can't be created for: " + message.author))
+
+            const rolesToCreate = args[0].split('|')
+            rolesToCreate.map(roleName => {
+                guild.roles.create({
+                    data: {
+                        name: roleName,
+                        color: args[1]
+                    }
+                })
+                    .then(role => {
+                        rolesSchema.create({
+                            roleId: role.id,
+                            roleName: roleName
+                        })
+                    }
+                    ).then(console.log(roleName + " role successfully created"))
+                    .catch(function (e) {
+                        console.error(e); // "oh, no!"
+                    })
+            })
             message.react('👍')
         }
         else {

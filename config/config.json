@@ -1,6 +1,6 @@
 {
     "discord_bot": {
-        "token": "NzM2ODYzNTI5MTI2MDY4MjY0.Xx0_ow.C2Z1PCu28otmGf8163yn9kdxuFQ"
+        "token": "NzM2ODYzNTI5MTI2MDY4MjY0.Xx0_ow.dnqD4BH5LiOTXJwbErsTDYybj9E"
     },
     "rolesIds": {
         "umass": "738147630382710816"
@@ -9,7 +9,9 @@
         "welcomeChat": "736975458360623134",
         "botLogs": "738116841330704446",
         "commandLogs": "737025645728497784",
-        "generalInfo": "738117180947693709"
+        "generalInfo": "738117180947693709",
+        "community": "702997447085129769",
+        "courses": "801996472723439698"
     },
     "guildId": "702996369165648023",
     "prefix": "!"

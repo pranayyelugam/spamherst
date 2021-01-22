@@ -67,14 +67,28 @@ const ChannelToggleRepository = [
         messageId: "738155758536884245",
         emoji: "🇵",
         channelId: "703000715475288276",
-        channelName: "personal-projects",
+        channelName: "personal projects",
         roleId: "UMass"
     },
     {
         messageId: "738155758536884245",
         emoji: "👨🏻‍🎓",
         channelId: "703123779219488788",
-        channelName: "final-year-peeps",
+        channelName: "final year peeps",
+        roleId: "UMass"
+    },
+    {
+        messageId: "738155758536884245",
+        emoji: "🏏",
+        channelId: "801406029342441493",
+        channelName: "sports",
+        roleId: "UMass"
+    },
+    {
+        messageId: "738155758536884245",
+        emoji: "🎵",
+        channelId: "801406056906883072",
+        channelName: "music and jamming",
         roleId: "UMass"
     }
 ]

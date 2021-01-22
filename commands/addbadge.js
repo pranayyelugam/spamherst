@@ -20,25 +20,30 @@ module.exports = {
         if (args.length == 1) {
             message.guild.members.fetch(message.author)
                 .then(member => {
-                    if (member.roles.cache.some(role => role.name === args[0])) {
-                        message.channel.send("You already have the " + args[0] + " badge :(").then(msg => msg.delete({ timeout: 10000 }))
-                        message.react('👎')
-                    } else {
-                        const role = guild.roles.cache.find(role => role.name === args[0])
-                        if (!role) {
-                            message.channel.send("Role not found").then(msg => msg.delete({ timeout: 10000 }))
+                    const rolesToAdd = args[0].split('|')
+
+                    rolesToAdd.map((roleItem, i) => {
+                        if (member.roles.cache.some(role => role.name === roleItem)) {
+                            message.channel.send("You already have the " + roleItem + " badge :(").then(msg => msg.delete({ timeout: 10000 }))
                             message.react('👎')
                         } else {
-                            if (badgesAllowedToAddByUsers(args[0])) {
+                            const role = guild.roles.cache.find(role => role.name === roleItem)
+                            if (!role) {
+                                message.channel.send("Badge not found").then(msg => msg.delete({ timeout: 10000 }))
+                                message.react('👎')
+                            } else {
+                                //if (badgesAllowedToAddByUsers(args[0])) {
                                 member.roles.add(role)
                                 message.react('👍')
-                            }
-                            else {
-                                message.channel.send("You don't have the access to the " + args[0] + " badge").then(msg => msg.delete({ timeout: 10000 }))
-                                message.react('👎')
+                                // }
+                                // else {
+                                //  message.channel.send("You don't have the access to the " + args[0] + " badge").then(msg => msg.delete({ timeout: 10000 }))
+                                //  message.react('👎')
+                                //  }
                             }
                         }
-                    }
+                    })
+
                 })
         }
         if (args.length == 2) {
@@ -70,7 +75,10 @@ module.exports = {
             const badgesAllowed = [
                 'Employed',
                 'Online',
-                'Spring'
+                'Spring',
+                'Puffton',
+                'Boulders',
+                'cs1'
             ]
             return badgesAllowed.includes(badgeName)
         }
