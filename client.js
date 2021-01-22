@@ -33,6 +33,6 @@ client.on("messageReactionRemove", function (messageReaction, user) {
     removeReaction(messageReaction, user)
 });
 
-client.login(config.discord_bot.token)
+client.login(process.env.token)
 
 module.exports = client
