@@ -90,6 +90,13 @@ const ChannelToggleRepository = [
         channelId: "801406056906883072",
         channelName: "music and jamming",
         roleId: "UMass"
+    },
+    {
+        messageId: "738155758536884245",
+        emoji: "🎵",
+        channelId: "805466012459597844",
+        channelName: "personal finance",
+        roleId: "UMass"
     }
 ]
 
